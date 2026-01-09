@@ -1,0 +1,89 @@
+We are trying to predict the attribute "Outcome" based on 8 other columns. Outcome = 0 means patient doesn't have diabetes and
+Outcome = 1 means the patient does.
+
+First we run a correlation matrix on our DataFrame to check which features are more / less important.
+
+Glucose                     0.466581
+BMI                         0.292695
+Age                         0.238356
+Pregnancies                 0.221898
+DiabetesPedigreeFunction    0.173844
+Insulin                     0.130548
+SkinThickness               0.074752
+BloodPressure               0.065068
+
+Scores before doing any preprocessing:
+
+Accuracy: 0.7467532467532467
+Precision: 0.6379310344827587
+Recall: 0.6727272727272727
+F1 Score: 0.6548672566371682
+
+Scores after imputing 0s with the median:
+
+Accuracy: 0.7597402597402597
+Precision: 0.6730769230769231
+Recall: 0.6363636363636364
+F1 Score: 0.6542056074766355
+
+Scores after intoducing some new features (Age*BMI, HighBMI, BMI^2, Age*BloodPressure, Age^2, BloodPressure^2):
+
+Accuracy: 0.7792207792207793
+Precision: 0.7058823529411765
+Recall: 0.6545454545454545
+F1 Score: 0.6792452830188679
+
+Accuracy: 0.7922077922077922
+Precision: 0.7169811320754716
+Recall: 0.6909090909090909
+F1 Score: 0.7037037037037037
+
+Accuracy: 0.8116883116883117
+Precision: 0.7708333333333334
+Recall: 0.6727272727272727
+F1 Score: 0.7184466019417476
+
+Average score of 10 random states using RandomForestRegressor:
+
+Average accuracy: 0.7772727272727271
+Average precision: 0.6967236074532729
+Average recall: 0.6504381523782998
+Average F1 Score: 0.6716430333937381
+
+Average score of 10 random states using LogisticRegression:
+
+Average accuracy: 0.7720779220779221
+Average precision: 0.7270737333373389
+Average recall: 0.5636941595502754
+Average F1 Score: 0.6330148423977897
+
+Average score of 10 random states using XGBClassifier:
+
+Average accuracy: 0.7474025974025975
+Average precision: 0.6457586877292896
+Average recall: 0.6186607423847741
+Average F1 Score: 0.6311080616856349
+
+Things to try in the future
+
+1. Add class_weight="balanced" → boosts recall
+2. Try XGBClassifier(scale_pos_weight=ratio)
+3. Try RandomForestClassifier()
+4. Use GridSearchCV to tune Logistic Regression hyperparameters
+5. Try PCA to remove noisy features
+6. Try RFE (Recursive Feature Elimination)
+7. Try SMOTE to oversample minority class
+
+After scaling features, using LogisticRegression and adding class_weight="balanced":
+
+Average accuracy: 0.7681818181818182
+Average precision: 0.6395156218422275
+Average recall: 0.7704326934083843
+Average F1 Score: 0.698669083134523
+
+
+Averages:
+Average accuracy: 0.780
+Average precision: 0.659
+Average recall: 0.775
+Average F1 Score: 0.711
